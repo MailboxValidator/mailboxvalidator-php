@@ -1,6 +1,7 @@
 {
-	"name": "mailboxvalidator/email-validation",
+	"name": "MailboxValidator/mailboxvalidator-php",
 	"description": "Validate an email address using the MailboxValidator API",
+	"type": "library",
 	"license": "LGPL-3.0",
 	"keywords": ["mailboxvalidator","email validation"],
 	"authors": [
