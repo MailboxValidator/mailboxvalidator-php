@@ -34,6 +34,7 @@ Sample Usage
 ============
 
 ```php
+<?php
 require_once __DIR__ . '/vendor/autoload.php';
 
 use MailboxValidator\SingleValidation;
@@ -69,6 +70,7 @@ else {
 	echo 'error_code = ' . $results->error_code . "\n";
 	echo 'error_message = ' . $results->error_message . "\n";
 }
+?>
 ```
 
 
