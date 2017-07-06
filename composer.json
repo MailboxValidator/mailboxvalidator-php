@@ -1,5 +1,5 @@
 {
-	"name": "MailboxValidator/mailboxvalidator-php",
+	"name": "mailboxvalidator/mailboxvalidator-php",
 	"description": "Validate an email address using the MailboxValidator API",
 	"type": "library",
 	"license": "LGPL-3.0",
