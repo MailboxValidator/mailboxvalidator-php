@@ -17,7 +17,7 @@ Add the following to your composer.json file:
 
 ```
 "require": {
-	"MailboxValidator/mailboxvalidator-php": "1.0.*"
+	"mailboxvalidator/mailboxvalidator-php": "1.0.*"
 }
 ```
 
