@@ -27,7 +27,7 @@ Dependencies
 
 An API key is required for this module to function.
 
-Go to http://www.mailboxvalidator.com/plans#api to sign up for FREE API plan and you'll be given an API key.
+Go to https://www.mailboxvalidator.com/plans#api to sign up for FREE API plan and you'll be given an API key.
 
 
 Usage
