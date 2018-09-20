@@ -17,7 +17,7 @@ Add the following to your composer.json file:
 
 ```
 "require": {
-	"mailboxvalidator/mailboxvalidator-php": "1.0.*"
+	"mailboxvalidator/mailboxvalidator-php": "1.1.*"
 }
 ```
 
@@ -30,8 +30,8 @@ An API key is required for this module to function.
 Go to https://www.mailboxvalidator.com/plans#api to sign up for FREE API plan and you'll be given an API key.
 
 
-Usage
-=====
+Usage for validating emails
+===========================
 
 ```php
 <?php
@@ -194,6 +194,137 @@ The error code if there is any error. See error table below.
 ### error_message
 
 The error message if there is any error. See error table below.
+
+
+Usage for checking if an email is from a disposable email provider
+==================================================================
+
+```php
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use MailboxValidator\SingleValidation;
+
+$mbv = new SingleValidation('PASTE_YOUR_API_KEY_HERE');
+
+$results = $mbv->DisposableEmail('example@example.com');
+
+if ($results === false) {
+	echo "Error connecting to API.\n";
+}
+else if (trim($results->error_code) == '') {
+	echo 'email_address = ' . $results->email_address . "\n";
+	echo 'is_disposable = ' . $results->is_disposable . "\n";
+	echo 'credits_available = ' . $results->credits_available . "\n";
+}
+else {
+	echo 'error_code = ' . $results->error_code . "\n";
+	echo 'error_message = ' . $results->error_message . "\n";
+}
+?>
+```
+
+Functions
+=========
+
+### SingleValidation(api_key)
+
+Creates a new instance of the MailboxValidator object with the API key.
+
+### DisposableEmail(email_address)
+
+Check if the supplied email address is from a disposable email provider.
+
+Result Fields
+=============
+
+### email_address
+
+The input email address.
+
+### is_disposable
+
+Whether the email address is a temporary one from a disposable email provider.
+
+Return values: True, False
+
+### credits_available
+
+The number of credits left to perform validations.
+
+### error_code
+
+The error code if there is any error. See error table below.
+
+### error_message
+
+The error message if there is any error. See error table below.
+
+
+Usage for checking if an email is from a free email provider
+============================================================
+
+```php
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use MailboxValidator\SingleValidation;
+
+$mbv = new SingleValidation('PASTE_YOUR_API_KEY_HERE');
+
+$results = $mbv->FreeEmail('example@example.com');
+
+if ($results === false) {
+	echo "Error connecting to API.\n";
+}
+else if (trim($results->error_code) == '') {
+	echo 'email_address = ' . $results->email_address . "\n";
+	echo 'is_free = ' . $results->is_free . "\n";
+	echo 'credits_available = ' . $results->credits_available . "\n";
+}
+else {
+	echo 'error_code = ' . $results->error_code . "\n";
+	echo 'error_message = ' . $results->error_message . "\n";
+}
+?>
+```
+
+Functions
+=========
+
+### SingleValidation(api_key)
+
+Creates a new instance of the MailboxValidator object with the API key.
+
+### FreeEmail(email_address)
+
+Check if the supplied email address is from a free email provider.
+
+Result Fields
+=============
+
+### email_address
+
+The input email address.
+
+### is_free
+
+Whether the email address is from a free email provider like Gmail or Hotmail.
+
+Return values: True, False
+
+### credits_available
+
+The number of credits left to perform validations.
+
+### error_code
+
+The error code if there is any error. See error table below.
+
+### error_message
+
+The error message if there is any error. See error table below.
+
 
 Errors
 ======
