@@ -1,13 +1,14 @@
 MailboxValidator PHP Module
 ===========================
 
-This PHP module provides an easy way to call the MailboxValidator API which validates if an email address is a valid one.
+This PHP module enables user to easily validate if an email address is valid, a type of disposable email or free email.
 
-This module can be used in many types of projects such as:
+This module can be useful in many types of projects, for example
 
- - validating a user's email during sign up
- - cleaning your mailing list prior to an email marketing campaign
- - a form of fraud check
+ - to validate an user's email during sign up
+ - to clean your mailing list prior to email sending
+ - to perform fraud check
+ - and so on
 
 
 Installation Using PHP Composer
