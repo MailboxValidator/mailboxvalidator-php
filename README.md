@@ -41,7 +41,7 @@ Creates a new instance of the MailboxValidator object with the API key.
 
 Performs email validation on the supplied email address.
 
-## Return Fields
+### Return Fields
 
 | Field Name | Description |
 |-----------|------------|
@@ -70,7 +70,7 @@ Performs email validation on the supplied email address.
 
 Check if the supplied email address is from a disposable email provider.
 
-## Return Fields
+### Return Fields
 
 | Field Name | Description |
 |-----------|------------|
@@ -84,7 +84,7 @@ Check if the supplied email address is from a disposable email provider.
 
 Check if the supplied email address is from a free email provider.
 
-## Return Fields
+### Return Fields
 
 | Field Name | Description |
 |-----------|------------|
@@ -94,8 +94,10 @@ Check if the supplied email address is from a free email provider.
 | error_code | The error code if there is any error. See error table in the below section. |
 | error_message | The error message if there is any error. See error table below. |
 
-Sample codes to validate email
-===========================
+Sample Codes
+============
+
+## Validate email
 
 ```php
 <?php
@@ -138,8 +140,7 @@ else {
 ```
 
 
-Sample codes to check if an email is from a disposable email provider
-==================================================================
+## Check if an email is from a disposable email provider
 
 ```php
 <?php
@@ -166,8 +167,7 @@ else {
 ?>
 ```
 
-Sample codes to check if an email is from a free email provider
-============================================================
+## Check if an email is from a free email provider
 
 ```php
 <?php
