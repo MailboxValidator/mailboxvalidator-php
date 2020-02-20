@@ -1,6 +1,6 @@
 {
 	"name": "mailboxvalidator/mailboxvalidator-php",
-	"description": "Email verification library for PHP using MailboxValidator API. It validates if the email is valid, from a free provider, contains high-risk keywords, whether it's a catch-all address and so much more.",
+	"description": "MailboxValidator PHP module enable users to block disposal email, detect free email and validate if an email is valid.",
 	"type": "library",
 	"license": "LGPL-3.0",
 	"keywords": ["mailboxvalidator","email validation"],
