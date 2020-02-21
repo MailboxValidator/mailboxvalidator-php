@@ -1,5 +1,7 @@
 MailboxValidator PHP Module
 ===========================
+[![Latest Stable Version](https://img.shields.io/packagist/v/mailboxvalidator/mailboxvalidator-php)](https://packagist.org/packages/mailboxvalidator/mailboxvalidator-php)
+![Packagist](https://img.shields.io/packagist/dt/mailboxvalidator/mailboxvalidator-php)
 
 This PHP module enables user to easily validate if an email address is valid, a type of disposable email or free email.
 
