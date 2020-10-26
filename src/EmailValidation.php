@@ -7,18 +7,21 @@ class EmailValidation {
     private $disposableEmailApiUrl = 'https://api.mailboxvalidator.com/v1/email/disposable';
     private $freeEmailApiUrl = 'https://api.mailboxvalidator.com/v1/email/free';
     
-    public function __construct($key) {
+    public function __construct($key)
+	{
         $this->apiKey = $key;
     }
     
-    public function __destruct() {
+    public function __destruct()
+	{
     
     }
     
     /*
     * Validate whether an email address is a valid email or not.
     */
-    public function validateEmail($email) {
+    public function validateEmail($email)
+	{
         try {
             $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json' ];
             $params2 = [];
@@ -43,7 +46,8 @@ class EmailValidation {
     /*
     * Validate whether an email address is a disposable email or not.
     */
-    public function isDisposableEmail($email) {
+    public function isDisposableEmail($email)
+	{
         try {
             $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json' ];
             $params2 = [];
@@ -68,7 +72,8 @@ class EmailValidation {
     /*
     * Validate whether an email address is a free email or not.
     */
-    public function isFreeEmail($email) {
+    public function isFreeEmail($email)
+	{
         try {
             $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json' ];
             $params2 = [];
@@ -90,4 +95,3 @@ class EmailValidation {
         }
     }
 }
-?>
