@@ -1,7 +1,8 @@
 <?php
 namespace MailboxValidator;
 
-class EmailValidation {
+class EmailValidation
+{
     private $apiKey = '';
     private $singleValidationApiUrl = 'https://api.mailboxvalidator.com/v1/validation/single';
     private $disposableEmailApiUrl = 'https://api.mailboxvalidator.com/v1/email/disposable';
