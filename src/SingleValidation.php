@@ -1,58 +1,33 @@
-<?php // MBV codeigniter and yii need to be updated as well
+<?php
 namespace MailboxValidator;
 
 class EmailValidation {
-    private $apikey = '';
-    private $singlevalidationapiurl = 'https://api.mailboxvalidator.com/v1/validation/single';
-    private $disposableemailapiurl = 'https://api.mailboxvalidator.com/v1/email/disposable';
-    private $freeemailapiurl = 'https://api.mailboxvalidator.com/v1/email/free';
+    private $apiKey = '';
+    private $singleValidationApiUrl = 'https://api.mailboxvalidator.com/v1/validation/single';
+    private $disposableEmailApiUrl = 'https://api.mailboxvalidator.com/v1/email/disposable';
+    private $freeEmailApiUrl = 'https://api.mailboxvalidator.com/v1/email/free';
     
     public function __construct($key) {
-        $this->apikey = $key;
+        $this->apiKey = $key;
     }
     
     public function __destruct() {
     
     }
     
+    /*
+    * Validate whether an email address is a valid email or not.
+    */
     public function validateEmail($email) {
-        /*
-        * Validate whether an email address is a valid email or not.
-        */
         try {
-            $params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json' ];
+            $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json' ];
             $params2 = [];
             foreach ($params as $key => $value) {
                 $params2[] = $key . '=' . rawurlencode($value);
             }
             $params = implode('&', $params2);
             
-            $results = file_get_contents($this->singlevalidationapiurl . '?' . $params);
-            
-            if ($results !== false) {
-                return json_decode($results);
-            }
-            else {
-                return false;
-            }
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-    
-    public function isDisposableEmail($email) {
-        /*
-        * Validate whether an email address is a disposable email or not.
-        */
-        try {
-            $params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json' ];
-            $params2 = [];
-            foreach ($params as $key => $value) {
-                $params2[] = $key . '=' . rawurlencode($value);
-            }
-            $params = implode('&', $params2);
-            
-            $results = file_get_contents($this->disposableemailapiurl . '?' . $params);
+            $results = file_get_contents($this->singleValidationApiUrl . '?' . $params);
             
             if ($results !== false) {
                 return json_decode($results);
@@ -65,19 +40,44 @@ class EmailValidation {
         }
     }
     
-    public function isFreeEmail($email) {
-        /*
-        * Validate whether an email address is a free email or not.
-        */
+    /*
+    * Validate whether an email address is a disposable email or not.
+    */
+    public function isDisposableEmail($email) {
         try {
-            $params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json' ];
+            $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json' ];
             $params2 = [];
             foreach ($params as $key => $value) {
                 $params2[] = $key . '=' . rawurlencode($value);
             }
             $params = implode('&', $params2);
             
-            $results = file_get_contents($this->freeemailapiurl . '?' . $params);
+            $results = file_get_contents($this->disposableEmailApiUrl . '?' . $params);
+            
+            if ($results !== false) {
+                return json_decode($results);
+            }
+            else {
+                return null;
+            }
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+    
+    /*
+    * Validate whether an email address is a free email or not.
+    */
+    public function isFreeEmail($email) {
+        try {
+            $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json' ];
+            $params2 = [];
+            foreach ($params as $key => $value) {
+                $params2[] = $key . '=' . rawurlencode($value);
+            }
+            $params = implode('&', $params2);
+            
+            $results = file_get_contents($this->freeEmailApiUrl . '?' . $params);
             
             if ($results !== false) {
                 return json_decode($results);
