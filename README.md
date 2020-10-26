@@ -20,7 +20,7 @@ Add the following to your composer.json file:
 
 ```
 "require": {
-	"mailboxvalidator/mailboxvalidator-php": "1.1.*"
+	"mailboxvalidator/mailboxvalidator-php": "2.0.*"
 }
 ```
 
@@ -36,11 +36,11 @@ Go to https://www.mailboxvalidator.com/plans#api to sign up for FREE API plan an
 Functions
 =========
 
-## SingleValidation (api_key)
+## **EmailValidation** (api_key)
 
 Creates a new instance of the MailboxValidator object with the API key.
 
-## ValidateEmail (email_address)
+## validateEmail (email_address)
 
 Performs email validation on the supplied email address.
 
@@ -69,7 +69,7 @@ Performs email validation on the supplied email address.
 | error_code | The error code if there is any error. See error table in the below section. |
 | error_message | The error message if there is any error. See error table in the below section. |
 
-## DisposableEmail (email_address)
+## isDisposableEmail (email_address)
 
 Check if the supplied email address is from a disposable email provider.
 
@@ -83,7 +83,7 @@ Check if the supplied email address is from a disposable email provider.
 | error_code | The error code if there is any error. See error table in the below section. |
 | error_message | The error message if there is any error. See error table in the below section. |
 
-## FreeEmail (email_address)
+## isFreeEmail (email_address)
 
 Check if the supplied email address is from a free email provider.
 
@@ -106,16 +106,16 @@ Sample Codes
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-use MailboxValidator\SingleValidation;
+use MailboxValidator\EmailValidation ;
 
-$mbv = new SingleValidation('PASTE_YOUR_API_KEY_HERE');
+$mbv = new EmailValidation ('PASTE_YOUR_API_KEY_HERE');
 
-$results = $mbv->ValidateEmail('example@example.com');
+$results = $mbv->validateEmail('example@example.com');
 
-if ($results === false) {
+if ($results === null) {
 	echo "Error connecting to API.\n";
 }
-else if (trim($results->error_code) == '') {
+else if (trim($results->error_code) === '') {
 	echo 'email_address = ' . $results->email_address . "\n";
 	echo 'domain = ' . $results->domain . "\n";
 	echo 'is_free = ' . $results->is_free . "\n";
@@ -149,16 +149,16 @@ else {
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-use MailboxValidator\SingleValidation;
+use MailboxValidator\EmailValidation;
 
-$mbv = new SingleValidation('PASTE_YOUR_API_KEY_HERE');
+$mbv = new EmailValidation('PASTE_YOUR_API_KEY_HERE');
 
-$results = $mbv->DisposableEmail('example@example.com');
+$results = $mbv->isDisposableEmail('example@example.com');
 
-if ($results === false) {
+if ($results === null) {
 	echo "Error connecting to API.\n";
 }
-else if (trim($results->error_code) == '') {
+else if (trim($results->error_code) === '') {
 	echo 'email_address = ' . $results->email_address . "\n";
 	echo 'is_disposable = ' . $results->is_disposable . "\n";
 	echo 'credits_available = ' . $results->credits_available . "\n";
@@ -176,16 +176,16 @@ else {
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-use MailboxValidator\SingleValidation;
+use MailboxValidator\EmailValidation;
 
-$mbv = new SingleValidation('PASTE_YOUR_API_KEY_HERE');
+$mbv = new EmailValidation('PASTE_YOUR_API_KEY_HERE');
 
-$results = $mbv->FreeEmail('example@example.com');
+$results = $mbv->isFreeEmail('example@example.com');
 
-if ($results === false) {
+if ($results === null) {
 	echo "Error connecting to API.\n";
 }
-else if (trim($results->error_code) == '') {
+else if (trim($results->error_code) === '') {
 	echo 'email_address = ' . $results->email_address . "\n";
 	echo 'is_free = ' . $results->is_free . "\n";
 	echo 'credits_available = ' . $results->credits_available . "\n";
