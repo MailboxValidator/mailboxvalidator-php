@@ -1,22 +1,30 @@
 {
-	"name": "mailboxvalidator/mailboxvalidator-php",
-	"description": "MailboxValidator PHP module enable users to block disposal email, detect free email and validate if an email is valid.",
-	"type": "library",
-	"license": "LGPL-3.0",
-	"keywords": ["mailboxvalidator","email validation"],
-	"authors": [
-		{
-			"name": "MailboxValidator",
-			"email": "support@mailboxvalidator.com"
-		}
-	],
-	"require": {
-			"php": ">=5.3"
-	},
-	"autoload": {
-		"psr-4": {
-			"MailboxValidator\\": "src/"
-		}
-	},
-	"version": "2.0.0"
+    "name": "mailboxvalidator/mailboxvalidator-php",
+    "description": "MailboxValidator PHP module enable users to block disposal email, detect free email and validate if an email is valid.",
+    "type": "library",
+    "license": "LGPL-3.0",
+    "keywords": ["mailboxvalidator","email validation"],
+    "authors": [
+        {
+            "name": "MailboxValidator",
+            "email": "support@mailboxvalidator.com"
+        }
+    ],
+    "require": {
+            "php": ">=5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "autoload": {
+        "psr-4": {
+            "MailboxValidator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FraudLabsPro\\Test\\": "tests/"
+        }
+    },
+    "version": "2.0.0"
 }
