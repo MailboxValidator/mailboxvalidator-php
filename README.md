@@ -20,7 +20,7 @@ Add the following to your composer.json file:
 
 ```
 "require": {
-	"mailboxvalidator/mailboxvalidator-php": "2.0.*"
+	"mailboxvalidator/mailboxvalidator-php": "2.1.*"
 }
 ```
 
@@ -115,29 +115,29 @@ $results = $mbv->validateEmail('example@example.com');
 if ($results === null) {
 	echo "Error connecting to API.\n";
 }
-else if (trim($results->error_code) === '') {
+else if (!isset($results->error)) {
 	echo 'email_address = ' . $results->email_address . "\n";
 	echo 'domain = ' . $results->domain . "\n";
-	echo 'is_free = ' . $results->is_free . "\n";
-	echo 'is_syntax = ' . $results->is_syntax . "\n";
-	echo 'is_domain = ' . $results->is_domain . "\n";
-	echo 'is_smtp = ' . $results->is_smtp . "\n";
-	echo 'is_verified = ' . $results->is_verified . "\n";
-	echo 'is_server_down = ' . $results->is_server_down . "\n";
-	echo 'is_greylisted = ' . $results->is_greylisted . "\n";
-	echo 'is_disposable = ' . $results->is_disposable . "\n";
-	echo 'is_suppressed = ' . $results->is_suppressed . "\n";
-	echo 'is_role = ' . $results->is_role . "\n";
-	echo 'is_high_risk = ' . $results->is_high_risk . "\n";
-	echo 'is_catchall = ' . $results->is_catchall . "\n";
+	echo 'is_free = ' . var_export($results->is_free, true) . "\n";
+	echo 'is_syntax = ' . var_export($results->is_syntax, true) . "\n";
+	echo 'is_domain = ' . var_export($results->is_domain, true) . "\n";
+	echo 'is_smtp = ' . var_export($results->is_smtp, true) . "\n";
+	echo 'is_verified = ' . var_export($results->is_verified, true) . "\n";
+	echo 'is_server_down = ' . var_export($results->is_server_down, true) . "\n";
+	echo 'is_greylisted = ' . var_export($results->is_greylisted, true) . "\n";
+	echo 'is_disposable = ' . var_export($results->is_disposable, true) . "\n";
+	echo 'is_suppressed = ' . var_export($results->is_suppressed, true) . "\n";
+	echo 'is_role = ' . var_export($results->is_role, true) . "\n";
+	echo 'is_high_risk = ' . var_export($results->is_high_risk, true) . "\n";
+	echo 'is_catchall = ' . var_export($results->is_catchall, true) . "\n";
 	echo 'mailboxvalidator_score = ' . $results->mailboxvalidator_score . "\n";
 	echo 'time_taken = ' . $results->time_taken . "\n";
-	echo 'status = ' . $results->status . "\n";
+	echo 'status = ' . var_export($results->status, true) . "\n";
 	echo 'credits_available = ' . $results->credits_available . "\n";
 }
 else {
-	echo 'error_code = ' . $results->error_code . "\n";
-	echo 'error_message = ' . $results->error_message . "\n";
+	echo 'error_code = ' . $results->error->error_code . "\n";
+	echo 'error_message = ' . $results->error->error_message . "\n";
 }
 ?>
 ```
@@ -158,14 +158,14 @@ $results = $mbv->isDisposableEmail('example@example.com');
 if ($results === null) {
 	echo "Error connecting to API.\n";
 }
-else if (trim($results->error_code) === '') {
+else if (!isset($results->error)) {
 	echo 'email_address = ' . $results->email_address . "\n";
-	echo 'is_disposable = ' . $results->is_disposable . "\n";
+	echo 'is_disposable = ' . var_export($results->is_disposable, true) . "\n";
 	echo 'credits_available = ' . $results->credits_available . "\n";
 }
 else {
-	echo 'error_code = ' . $results->error_code . "\n";
-	echo 'error_message = ' . $results->error_message . "\n";
+	echo 'error_code = ' . $results->error->error_code . "\n";
+	echo 'error_message = ' . $results->error->error_message . "\n";
 }
 ?>
 ```
@@ -185,14 +185,14 @@ $results = $mbv->isFreeEmail('example@example.com');
 if ($results === null) {
 	echo "Error connecting to API.\n";
 }
-else if (trim($results->error_code) === '') {
+else if (!isset($results->error)) {
 	echo 'email_address = ' . $results->email_address . "\n";
-	echo 'is_free = ' . $results->is_free . "\n";
+	echo 'is_free = ' . var_export($results->is_free, true) . "\n";
 	echo 'credits_available = ' . $results->credits_available . "\n";
 }
 else {
-	echo 'error_code = ' . $results->error_code . "\n";
-	echo 'error_message = ' . $results->error_message . "\n";
+	echo 'error_code = ' . $results->error->error_code . "\n";
+	echo 'error_message = ' . $results->error->error_message . "\n";
 }
 ?>
 ```
@@ -212,4 +212,4 @@ Errors
 Copyright
 =========
 
-Copyright(C) 2018-2020 by MailboxValidator.com.
+Copyright(C) 2018-2023 by MailboxValidator.com.
