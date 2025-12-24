@@ -2,7 +2,7 @@
     "name": "mailboxvalidator/mailboxvalidator-php",
     "description": "MailboxValidator PHP module enable users to block disposal email, detect free email and validate if an email is valid.",
     "type": "library",
-    "license": "LGPL-3.0",
+    "license": "MIT",
     "keywords": ["mailboxvalidator","email validation"],
     "authors": [
         {
