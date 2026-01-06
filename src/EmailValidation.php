@@ -4,9 +4,7 @@ namespace MailboxValidator;
 class EmailValidation
 {
     private $apiKey = '';
-    private $singleValidationApiUrl = 'https://api.mailboxvalidator.com/v2/validation/single';
-    private $disposableEmailApiUrl = 'https://api.mailboxvalidator.com/v2/email/disposable';
-    private $freeEmailApiUrl = 'https://api.mailboxvalidator.com/v2/email/free';
+    private $baseUrl = 'https://api.mailboxvalidator.com/v2/';
     
     public function __construct($key)
     {
@@ -17,118 +15,72 @@ class EmailValidation
     {
     
     }
+
+    /**
+     * Internal helper to handle API requests
+     */
+    private function request($path, $email)
+    {
+        $params = array(
+            'email'  => $email,
+            'key'    => $this->apiKey,
+            'format' => 'json',
+            'source' => 'sdk-php-mbv'
+        );
+
+        $url = $this->baseUrl . $path . '?' . http_build_query($params);
+        $results = $this->curl($url);
+
+        if ($results) {
+            return json_decode($results);
+        }
+
+        return null;
+    }
 	
-	/*
-	* Custom wrapper function for CURL
-	*/
-	public function curl($url) {
-		// Initialize cURL session
-		$ch = curl_init();
-		
-		// Set cURL options
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string instead of outputting it
+	/**
+	 * Custom wrapper function for CURL
+	 */
+	public function curl($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Optimization: Added a timeout to prevent script hanging
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30); 
+        
+        $response = curl_exec($ch);
 
-		// Execute cURL session and store the response in a variable
-		$response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            curl_close($ch);
+            return null;
+        }
 
-		// Check for cURL errors
-		if (curl_errno($ch)) {
-			// echo 'cURL Error: ' . curl_error($ch);
-			return null;
-		}
-
-		// Close cURL session
-		curl_close($ch);
-		
-		return $response;
-	}
+        curl_close($ch);
+        return $response;
+    }
     
-    /*
-    * Validate whether an email address is a valid email or not.
-    */
+    /**
+     * Validate whether an email address is a valid email or not.
+     */
     public function validateEmail($email)
     {
-        try {
-            $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json', 'source' => 'sdk-php-mbv' ];
-            $params2 = [];
-            foreach ($params as $key => $value) {
-                $params2[] = $key . '=' . rawurlencode($value);
-            }
-            $params = implode('&', $params2);
-            
-            $results = $this->curl($this->singleValidationApiUrl . '?' . $params);
-            
-            if ($results !== false) {
-                return json_decode($results);
-            }
-            else {
-                return null;
-            }
-        } catch (Exception $e) {
-            return null;
-        }
-		// restore_error_handler();
+        return $this->request('validation/single', $email);
     }
     
-    /*
-    * Validate whether an email address is a disposable email or not.
-    */
+    /**
+     * Validate whether an email address is a disposable email or not.
+     */
     public function isDisposableEmail($email)
     {
-        try {
-            $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json', 'source' => 'sdk-php-mbv' ];
-            $params2 = [];
-            foreach ($params as $key => $value) {
-                $params2[] = $key . '=' . rawurlencode($value);
-            }
-            $params = implode('&', $params2);
-            
-            $results = $this->curl($this->disposableEmailApiUrl . '?' . $params);
-            
-            if ($results !== false) {
-                return json_decode($results);
-            }
-            else {
-                return null;
-            }
-        } catch (Exception $e) {
-            return null;
-        }
+        return $this->request('email/disposable', $email);
     }
     
-    /*
-    * Validate whether an email address is a free email or not.
-    */
+    /**
+     * Validate whether an email address is a free email or not.
+     */
     public function isFreeEmail($email)
     {
-        try {
-            $params = [ 'email' => $email, 'key' => $this->apiKey, 'format' => 'json', 'source' => 'sdk-php-mbv' ];
-            $params2 = [];
-            foreach ($params as $key => $value) {
-                $params2[] = $key . '=' . rawurlencode($value);
-            }
-            $params = implode('&', $params2);
-            
-            $results = $this->curl($this->freeEmailApiUrl . '?' . $params);
-            
-            if ($results !== false) {
-                return json_decode($results);
-            }
-            else {
-                return null;
-            }
-        } catch (Exception $e) {
-            return null;
-        }
+        return $this->request('email/free', $email);
     }
-	
-	/*private function ()
-	{
-		set_error_handler(
-			function ($severity, $message, $file, $line) {
-				throw new ErrorException($message, $severity, $severity, $file, $line);
-			}
-		);
-	}*/
 }
